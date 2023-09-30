@@ -1,4 +1,4 @@
-import UserSignInForm from "@/components/landing/forms/UserSignInForm";
+import UserSignInForm from "@/components/features/auth/UserSignInForm";
 
 export const metadata = {
   title: `Login - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
@@ -16,7 +16,6 @@ export default function SignIn() {
               Bem vindo de volta. O meio ambiente anseia o seu retorno.
             </h1>
           </div>
-
           {/* Form */}
           <UserSignInForm />
         </div>

@@ -1,7 +1,9 @@
-import Providers from "@/components/Providers";
+import Providers from "@/components/providers/Providers";
 import "./css/style.css";
 
 import { Inter } from "next/font/google";
+import ToastProvider from "@/components/providers/ToastProvider";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} bg-white font-inter tracking-tight text-gray-900 antialiased`}
+        className={`${inter.variable} bg-neutral-50 font-inter tracking-tight text-gray-900 antialiased transition-colors dark:bg-slate-900`}
       >
-        <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Providers>{children}</Providers>
-        </div>
+        <ToastProvider>
+          <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+            <Providers>{children}</Providers>
+          </div>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -1,7 +1,11 @@
 "use client";
+import LoadingButton from "@/components/ui/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label, TextInput } from "flowbite-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 type FormValues = {
@@ -26,6 +30,9 @@ const schema = z.object({
 });
 
 const UserSignUpForm = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -34,12 +41,22 @@ const UserSignUpForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     const { username, email, password } = data;
-
+    setLoading(true);
     const res = await fetch("/nest-api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
+
+    if (res.ok) {
+      setLoading(false);
+      toast.success("Cadastro realizado com sucesso!");
+      setTimeout(() => {
+        router.push("/auth/signin");
+      }, 500);
+    } else {
+      toast.error("Erro ao realizar o cadastro");
+    }
   };
 
   return (
@@ -111,22 +128,20 @@ const UserSignUpForm = () => {
       </div>
       <div className="-mx-3 mt-6 flex flex-wrap">
         <div className="w-full px-3">
-          <button className="btn w-full bg-blue-600 text-white hover:bg-blue-700">
-            Cadastrar-se
-          </button>
+          {loading ? (
+            <LoadingButton />
+          ) : (
+            <button
+              disabled={loading}
+              className={`btn w-full bg-blue-600 text-white hover:bg-blue-700 ${
+                loading && "opacity-70"
+              }`}
+            >
+              <span>Cadastrar-se</span>
+            </button>
+          )}
         </div>
       </div>
-      {/* <div className="mt-3 text-center text-sm text-gray-500">
-                By creating an account, you agree to the{" "}
-                <a className="underline" href="#0">
-                  terms & conditions
-                </a>
-                , and our{" "}
-                <a className="underline" href="#0">
-                  privacy policy
-                </a>
-                .
-              </div> */}
     </form>
   );
 };

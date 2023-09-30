@@ -1,30 +1,90 @@
 "use client";
 
+import LoadingButton from "@/components/ui/LoadingButton";
+import { fields } from "@hookform/resolvers/ajv/src/__tests__/__fixtures__/data.js";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox, Label, TextInput } from "flowbite-react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { set, useForm } from "react-hook-form";
+import z from "zod";
 
-type Props = {};
+const schema = z.object({
+  username: z.string().min(3, {
+    message: "Seu nome de usuário ou email deve ter mais que 3 caracteres",
+  }),
+  password: z.string(),
+});
 
-const UserSignInForm = (props: Props) => {
+interface FormValues {
+  username: string;
+  password: string;
+}
+
+const UserSignInForm = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  const onSubmit = async (data: FormValues) => {
+    const { username, password } = data;
+
+    setLoading(true);
+    const result = await signIn("credentials", {
+      username,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      setLoading(false);
+      setError("password", {
+        message: "Usuário ou senha incorretos",
+      });
+    } else {
+      setLoading(false);
+      router.push("/system/user");
+    }
+  };
+
   return (
     <div className="mx-auto max-w-sm">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="-mx-3 mb-4 flex flex-wrap">
           <div className="w-full px-3">
-            <Label htmlFor="email">Nickname</Label>
+            <Label htmlFor="username" className="dark:text-gray-600">
+              Nickname
+            </Label>
             <TextInput
+              type="text"
               sizing={"sm"}
-              id="email"
-              type="email"
+              id="username"
               placeholder="Insira seu nickname ou email"
               required
+              {...register("username", { required: true })}
             />
+            {errors && (
+              <span className="text-sm text-red-500">
+                {errors.username?.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="-mx-3 mb-4 flex flex-wrap">
           <div className="w-full px-3">
             <div className="flex justify-between">
-              <Label htmlFor="password">Senha</Label>
+              <div className="text-gray">
+                <Label htmlFor="password" color="text-gray">
+                  Senha
+                </Label>
+              </div>
               <Link
                 href="/reset-password"
                 className="text-sm font-medium text-blue-600 hover:underline"
@@ -32,13 +92,20 @@ const UserSignInForm = (props: Props) => {
                 Esqueceu a sua senha?
               </Link>
             </div>
-            <TextInput
-              sizing={"sm"}
-              id="password"
-              type="password"
-              placeholder="Insira sua senha"
-              required
-            />
+            <div>
+              <TextInput
+                id="password"
+                type="password"
+                placeholder="Insira sua senha"
+                required
+                {...register("password", { required: true })}
+              />
+              {errors && (
+                <span className="text-sm text-red-500">
+                  {errors.password?.message}
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <div className="-mx-3 mb-4 flex flex-wrap">
@@ -53,8 +120,11 @@ const UserSignInForm = (props: Props) => {
         </div>
         <div className="-mx-3 mt-6 flex flex-wrap">
           <div className="w-full px-3">
-            <button className="btn w-full bg-blue-600 text-white hover:bg-blue-700">
-              Entrar
+            <button
+              disabled={loading}
+              className="btn w-full bg-blue-600 text-white hover:bg-blue-700"
+            >
+              {loading ? <LoadingButton /> : "Entrar"}
             </button>
           </div>
         </div>
@@ -111,6 +181,14 @@ const UserSignInForm = (props: Props) => {
           className="text-blue-600 transition duration-150 ease-in-out hover:underline"
         >
           Cadastre-se
+        </Link>
+      </div>
+      <div className="mt-2 text-center">
+        <Link
+          href="/auth/signin/company"
+          className="text-sm font-medium text-blue-600 hover:underline"
+        >
+          Logar como empresa
         </Link>
       </div>
     </div>
