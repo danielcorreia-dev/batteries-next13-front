@@ -50,7 +50,7 @@ const UserSignInForm = () => {
       });
     } else {
       setLoading(false);
-      router.push("/system/user");
+      router.push("/system/user/profile");
     }
   };
 

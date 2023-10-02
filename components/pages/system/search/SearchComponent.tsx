@@ -25,7 +25,6 @@ const SearchComponent: FC = () => {
 
     return data.data;
   };
-  console.log(initialValue, users);
 
   const { data: queryData, isValidating } = useSWR(
     debouncedValue ?? null,
@@ -56,7 +55,7 @@ const SearchComponent: FC = () => {
 
   return (
     <>
-      <SystemHeader title="Pesquisa" />
+      <SystemHeader title="Pesquisa" subtitle="Pesquise por empresas" />
       <CardContainer className="mb-8 max-w-5xl">
         <SearchBar
           inputValue={inputValue}
@@ -78,7 +77,7 @@ const SearchComponent: FC = () => {
             className="h-2/5 w-2/5 "
           />
           <h2 className="text-sm text-neutral-500 dark:text-neutral-50">
-            Busque por algo
+            Digite na barra de pesquisa para encontrar alguma empresa
           </h2>
         </div>
       )}

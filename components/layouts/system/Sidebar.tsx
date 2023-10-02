@@ -1,9 +1,15 @@
 "use client";
 
-import { IconSearch, IconTrophy, IconUserCircle } from "@tabler/icons-react";
+import {
+  IconMap,
+  IconMedal,
+  IconSearch,
+  IconTrophy,
+  IconUserCircle,
+} from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { FC } from "react";
 import SidebarListItem from "./SidebarListItem";
 import SidebarMobile from "./SidebarMobile";
@@ -23,7 +29,7 @@ const Sidebar: FC = () => {
   const items: SidebarItem[] = [
     {
       title: "Perfil",
-      href: "/system/user",
+      href: "/system/user/profile",
       icon: IconUserCircle,
     },
     {
@@ -32,9 +38,19 @@ const Sidebar: FC = () => {
       icon: IconSearch,
     },
     {
+      title: "Ranking",
+      href: "/system/ranking",
+      icon: IconTrophy,
+    },
+    {
+      title: "Mapa",
+      href: "/system/maps",
+      icon: IconMap,
+    },
+    {
       title: "Conquistas",
       href: "/system/user/achievements",
-      icon: IconTrophy,
+      icon: IconMedal,
     },
   ];
 
@@ -43,7 +59,7 @@ const Sidebar: FC = () => {
       <SidebarMobile />
       <div
         id="application-sidebar"
-        className="hs-overlay scrollbar-y dark:scrollbar-y fixed bottom-0 left-0 top-0 z-[60] hidden w-80 -translate-x-full transform overflow-y-auto border-r border-gray-200 bg-white pb-10 pt-7 transition-all duration-300 hs-overlay-open:translate-x-0 dark:border-slate-700 dark:bg-slate-800 md:w-3/12 lg:bottom-0 lg:right-auto lg:block lg:translate-x-0"
+        className="hs-overlay scrollbar-y dark:scrollbar-y fixed bottom-0 left-0 top-0 z-[10] hidden w-80 -translate-x-full transform overflow-y-auto border-r border-gray-200 bg-white pb-10 pt-7 transition-all duration-300 hs-overlay-open:translate-x-0 dark:border-slate-700 dark:bg-slate-800 md:w-3/12 lg:bottom-0 lg:right-auto lg:block lg:translate-x-0"
       >
         <div className="mb-7 px-6 pt-2">
           <Link

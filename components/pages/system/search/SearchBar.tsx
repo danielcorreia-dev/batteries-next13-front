@@ -18,7 +18,7 @@ const SearchBar: FC<Props> = ({ inputValue, setInputValue, isHandling }) => {
           id="hs-search-box-with-loading-5"
           name="hs-search-box-with-loading-5"
           className="block w-full rounded-md border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:border-blue-700 dark:bg-slate-900 dark:text-neutral-300"
-          placeholder="Pesquise a empresa/usuário desejado"
+          placeholder="Pesquise a empresa desejada"
         />
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
           <svg

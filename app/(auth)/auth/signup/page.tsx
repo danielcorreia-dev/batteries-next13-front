@@ -70,7 +70,7 @@ export default function SignUp() {
             <div className="mt-6 text-center text-gray-600">
               Já tem uma conta?{" "}
               <Link
-                href="/signin"
+                href="/auth/signin"
                 className="text-blue-600 transition duration-150 ease-in-out hover:underline"
               >
                 Logue-se
