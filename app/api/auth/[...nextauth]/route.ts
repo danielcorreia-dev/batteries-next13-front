@@ -35,14 +35,17 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.username || !credentials?.password) return null;
 
         const { username, password, userType } = credentials;
-        const res = await fetch(`${process.env.DOMAIN_URL}/api/auth/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "user-type": userType || "user",
+        const res = await fetch(
+          `${process.env.DOMAIN_URL}/api/auth/login/user`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "user-type": userType || "user",
+            },
+            body: JSON.stringify({ username, password }),
           },
-          body: JSON.stringify({ username, password }),
-        });
+        );
 
         const data = await res.json();
 

@@ -1,12 +1,14 @@
 "use client";
 
-import React, { FC } from "react";
-import SidebarMobile from "./SidebarMobile";
-import Link from "next/link";
-import SidebarListItem from "./SidebarListItem";
-import { usePathname } from "next/navigation";
+import { IconSearch, IconTrophy, IconUserCircle } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
-import { IconUserCircle } from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React, { FC } from "react";
+import SidebarListItem from "./SidebarListItem";
+import SidebarMobile from "./SidebarMobile";
+import SidebarAvatar from "./SidebarAvatar";
+import Logo from "@/components/landing/ui/logo";
 
 type SidebarItem = {
   title: string;
@@ -15,16 +17,24 @@ type SidebarItem = {
 };
 
 const Sidebar: FC = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
-
-  console.log(session);
 
   const items: SidebarItem[] = [
     {
-      title: "Profile",
+      title: "Perfil",
       href: "/system/user",
       icon: IconUserCircle,
+    },
+    {
+      title: "Pesquisa",
+      href: "/system/search",
+      icon: IconSearch,
+    },
+    {
+      title: "Conquistas",
+      href: "/system/user/achievements",
+      icon: IconTrophy,
     },
   ];
 
@@ -33,22 +43,25 @@ const Sidebar: FC = () => {
       <SidebarMobile />
       <div
         id="application-sidebar"
-        className="hs-overlay scrollbar-y dark:scrollbar-y fixed bottom-0 left-0 top-0 z-[60] hidden w-72 -translate-x-full transform overflow-y-auto border-r border-gray-200 bg-white pb-10 pt-7 transition-all duration-300 hs-overlay-open:translate-x-0 dark:border-slate-700 dark:bg-slate-800 lg:bottom-0 lg:right-auto lg:block lg:translate-x-0"
+        className="hs-overlay scrollbar-y dark:scrollbar-y fixed bottom-0 left-0 top-0 z-[60] hidden w-80 -translate-x-full transform overflow-y-auto border-r border-gray-200 bg-white pb-10 pt-7 transition-all duration-300 hs-overlay-open:translate-x-0 dark:border-slate-700 dark:bg-slate-800 md:w-3/12 lg:bottom-0 lg:right-auto lg:block lg:translate-x-0"
       >
-        <div className="px-6">
+        <div className="mb-7 px-6 pt-2">
           <Link
             className="flex-none text-xl font-semibold dark:text-white"
             href="/system/user"
             aria-label="Brand"
           >
-            Brand
+            <div className="flex items-center gap-3">
+              <Logo />
+              <span>BT Project</span>
+            </div>
           </Link>
         </div>
         <nav
           className="hs-accordion-group flex w-full flex-col flex-wrap p-6"
           data-hs-accordion-always-open
         >
-          <ul className="space-y-1.5">
+          <ul className="mb-12 space-y-1.5">
             {items.map((item, index) => (
               <SidebarListItem
                 item={item}
@@ -57,6 +70,17 @@ const Sidebar: FC = () => {
               />
             ))}
           </ul>
+          {!session ? (
+            <div className="flex animate-pulse">
+              <div className="flex-shrink-0">
+                <span className="block h-12 w-12 rounded-full bg-gray-200 dark:bg-gray-700"></span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <SidebarAvatar session={session} />
+            </>
+          )}
         </nav>
       </div>
     </>

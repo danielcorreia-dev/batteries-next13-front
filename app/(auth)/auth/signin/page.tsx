@@ -1,11 +1,20 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import UserSignInForm from "@/components/features/auth/UserSignInForm";
+import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: `Login - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
   description: "Page description",
 };
 
-export default function SignIn() {
+export default async function SignIn() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/system/user");
+  }
+
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

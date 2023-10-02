@@ -32,7 +32,7 @@ const SidebarListItem: React.FC<SidebarListItemProps> = ({
           className={`text-slate-700 transition-colors dark:text-neutral-100 ${
             isActive
               ? "bg-sky-100 text-slate-700 group-hover:bg-blue-200  group-hover:text-slate-600 dark:bg-slate-900 dark:text-blue-400 dark:group-hover:bg-slate-600 group-hover:dark:text-blue-300"
-              : "bg-neutral-300 text-slate-700 group-hover:bg-slate-200 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-600"
+              : "bg-gray-100 text-slate-700 group-hover:bg-slate-200 dark:bg-slate-900 dark:text-white dark:group-hover:bg-slate-600"
           }`}
           size={20}
         />

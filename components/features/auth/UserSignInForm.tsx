@@ -95,6 +95,7 @@ const UserSignInForm = () => {
             <div>
               <TextInput
                 id="password"
+                sizing={"sm"}
                 type="password"
                 placeholder="Insira sua senha"
                 required

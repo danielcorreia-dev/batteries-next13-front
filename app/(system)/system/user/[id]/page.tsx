@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Profile } from "@/components/pages/system/user-profile/Profile";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { IconChevronRight } from "@tabler/icons-react";
+import CardContainer from "@/components/ui/CardContainer";
+import SystemHeader from "@/components/ui/SystemHeader";
 import { getServerSession } from "next-auth";
 import React from "react";
 
@@ -10,13 +10,17 @@ export const metadata = {
   description: "Página de perfil do usuário",
 };
 
-type Props = {};
+type Props = {
+  params: {
+    id: string;
+  };
+};
 
 const Page = async (props: Props) => {
+  console.log(props.params.id);
   const session = await getServerSession(authOptions);
-
   const res = await fetch(
-    `${process.env.DOMAIN_URL}/api/users/` + session?.user.id,
+    `${process.env.DOMAIN_URL}/api/users/` + props.params.id,
     {
       method: "GET",
       headers: {
@@ -30,20 +34,13 @@ const Page = async (props: Props) => {
   const user = data.data;
   return (
     <>
-      <Breadcrumbs
-        homeElement={"Home"}
-        separator={
-          <span>
-            <IconChevronRight size={16} className="dark:text-white" />
-          </span>
-        }
-        activeClasses="text-blue-600 dark:text-blue-400 !text-blue-500"
-        listClasses="hover:underline font-semibold transition-colors duration-200 ease-in-out text-gray-500 dark:text-neutral-300"
-        capitalizeLinks
-      />
-      <Profile.Root>
-        <Profile.Header user={user} />
-      </Profile.Root>
+      <SystemHeader title="Perfil de usuário" />
+      <div className="container grid gap-6  md:grid-cols-8">
+        <Profile.Root className="col-span-6">
+          <Profile.Header user={user} />
+        </Profile.Root>
+        <CardContainer className="col-span-2">asdf</CardContainer>
+      </div>
     </>
   );
 };
