@@ -64,7 +64,7 @@ const Sidebar: FC = () => {
         <div className="mb-7 px-6 pt-2">
           <Link
             className="flex-none text-xl font-semibold dark:text-white"
-            href="/system/user"
+            href="/system/user/profile"
             aria-label="Brand"
           >
             <div className="flex items-center gap-3">

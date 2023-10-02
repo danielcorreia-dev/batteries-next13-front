@@ -7,7 +7,6 @@ declare module "next-auth" {
       email: string;
       name: string;
       avatar: string;
-      type: string;
     };
 
     backendTokens: {
