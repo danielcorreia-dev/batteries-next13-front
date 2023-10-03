@@ -30,18 +30,7 @@ const Page = async (props: Props) => {
   const user = data.data;
   return (
     <>
-      <Breadcrumbs
-        homeElement={"Home"}
-        separator={
-          <span>
-            <IconChevronRight size={16} className="dark:text-white" />
-          </span>
-        }
-        activeClasses="text-blue-600 dark:text-blue-400 !text-blue-500"
-        listClasses="hover:underline font-semibold transition-colors duration-200 ease-in-out text-gray-500 dark:text-neutral-300"
-        capitalizeLinks
-      />
-      <Profile.Root>
+      <Profile.Root className="max-w-5xl">
         <Profile.Header user={user} />
       </Profile.Root>
     </>
