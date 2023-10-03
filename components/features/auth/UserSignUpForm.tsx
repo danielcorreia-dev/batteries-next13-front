@@ -42,7 +42,7 @@ const UserSignUpForm = () => {
   const onSubmit = async (data: FormValues) => {
     const { username, email, password } = data;
     setLoading(true);
-    const res = await fetch("/nest-api/auth/register", {
+    const res = await fetch("/nest-api/auth/register/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
