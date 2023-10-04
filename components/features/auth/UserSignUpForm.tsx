@@ -128,18 +128,14 @@ const UserSignUpForm = () => {
       </div>
       <div className="-mx-3 mt-6 flex flex-wrap">
         <div className="w-full px-3">
-          {loading ? (
-            <LoadingButton />
-          ) : (
-            <button
-              disabled={loading}
-              className={`btn w-full bg-blue-600 text-white hover:bg-blue-700 ${
-                loading && "opacity-70"
-              }`}
-            >
-              <span>Cadastrar-se</span>
-            </button>
-          )}
+          <button
+            disabled={loading}
+            className={`btn w-full bg-blue-600 text-white hover:bg-blue-700 ${
+              loading && "opacity-70"
+            }`}
+          >
+            {loading ? <LoadingButton /> : <span>Cadastrar-se</span>}
+          </button>
         </div>
       </div>
     </form>

@@ -1,16 +1,16 @@
 "use client";
+import useIsMounted from "@/hooks/use-is-mounted";
+import MockUser from "@/public/images/settings/avatar_mock.jpg";
+import { UserSetting } from "@/types/user-setting";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { Modal } from "flowbite-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
-import MockUser from "@/public/images/settings/avatar_mock.jpg";
-import { useSession } from "next-auth/react";
-import { UserSetting } from "@/types/user-setting";
 import { toast } from "react-toastify";
-import useIsMounted from "@/hooks/use-is-mounted";
+import z from "zod";
 
 type Props = {
   user: UserSetting;
@@ -43,7 +43,7 @@ const AlterUser: FC<Props> = ({ user }) => {
     if (isMounted.current) {
       setIsLoading(false);
     }
-  });
+  }, [isMounted]);
 
   useEffect(() => {
     if (selectedImage) {
@@ -135,8 +135,10 @@ const AlterUser: FC<Props> = ({ user }) => {
                       className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
                       src={imageUrl || avatar || MockUser}
                       alt="Image Description"
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{
+                        objectFit: "cover",
+                      }}
                       quality={100}
                     />
                   </div>

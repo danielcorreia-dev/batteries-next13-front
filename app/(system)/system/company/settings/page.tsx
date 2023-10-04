@@ -1,19 +1,17 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import UserTabComponent from "@/components/features/settings/user/UserTabComponent";
+import CompanyTabComponent from "@/components/features/settings/company/CompanyTabComponent";
 import CardContainer from "@/components/ui/CardContainer";
 import SystemHeader from "@/components/ui/SystemHeader";
 import { getServerSession } from "next-auth";
-import React from "react";
 
 export const metadata = {
   title: `Configurações - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
 };
 
-const Settings = async () => {
+const SettingsPage = async () => {
   const sessionUser = await getServerSession(authOptions);
-
-  const user = await fetch(
-    `${process.env.DOMAIN_URL}/api/users/${sessionUser?.user.id}`,
+  const company = await fetch(
+    `${process.env.DOMAIN_URL}/api/company/${sessionUser?.user.id}`,
     {
       method: "GET",
       headers: {
@@ -23,20 +21,19 @@ const Settings = async () => {
     },
   );
 
-  const data = await user.json();
-  const userData = await data.data;
+  const data = await company.json();
 
   return (
     <>
       <SystemHeader
         title="Configurações"
-        subtitle="Altere as preferências e configurações relacionadas a sua conta"
+        subtitle="Altere as preferências e configurações relacionadas a sua empresa"
       />
       <CardContainer className="max-w-5xl !overflow-y-auto">
-        <UserTabComponent user={userData} />
+        <CompanyTabComponent />
       </CardContainer>
     </>
   );
 };
 
-export default Settings;
+export default SettingsPage;

@@ -34,7 +34,9 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Site branding */}
           <div className="mr-4 shrink-0">
-            <Logo />
+            <Link href={"/"}>
+              <Logo />
+            </Link>
           </div>
 
           {/* Desktop navigation */}

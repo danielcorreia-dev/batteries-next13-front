@@ -74,7 +74,8 @@ const SearchComponent: FC = () => {
           <Image
             src={SearchPlaceholder}
             alt="Search placholder"
-            className="h-2/5 w-2/5 "
+            className="h-2/5 w-2/5"
+            priority={true}
           />
           <h2 className="text-sm text-neutral-500 dark:text-neutral-50">
             Digite na barra de pesquisa para encontrar alguma empresa

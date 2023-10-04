@@ -1,8 +1,8 @@
-import { IconCircleX, IconTrophy } from "@tabler/icons-react";
 import React, { FC } from "react";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { IconCircleX, IconInfoCircle, IconTrophy } from "@tabler/icons-react";
 import { Achievement } from "@/types/achievement";
 import { IconCircleCheckFilled } from "@tabler/icons-react";
+import GetIcon from "@/components/ui/GetIcon";
 
 type Props = {
   achievement: Achievement;
@@ -17,8 +17,9 @@ const AchievementItem: FC<Props> = ({ achievement }) => {
     userHasAchievement,
     date,
     requiredPoints,
-    icon: Icon,
+    icon,
   } = achievement;
+
   return (
     <>
       <button
@@ -27,7 +28,13 @@ const AchievementItem: FC<Props> = ({ achievement }) => {
       >
         <div className="w-full p-4 md:p-5">
           <div className="flex items-center justify-between">
-            <div>{Icon ? <Icon /> : <IconTrophy size={24} />}</div>
+            <div>
+              {icon ? (
+                <GetIcon icon={icon} className="text-blue-500" />
+              ) : (
+                <IconTrophy size={24} />
+              )}
+            </div>
             <div className="">
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-gray-400">

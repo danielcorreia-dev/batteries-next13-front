@@ -1,12 +1,7 @@
 "use client";
-import {
-  IconPackage,
-  IconSettings,
-  IconTrash,
-  IconUser,
-} from "@tabler/icons-react";
+import { IconTrash, IconUser } from "@tabler/icons-react";
 import { Tabs } from "flowbite-react";
-import React, { FC } from "react";
+import { FC } from "react";
 import AlterUser from "./AlterUser";
 import { UserSetting } from "@/types/user-setting";
 import DeleteUser from "./DeleteUser";
@@ -15,7 +10,7 @@ type Props = {
   user: UserSetting;
 };
 
-const TabComponent: FC<Props> = ({ user }) => {
+const UserTabComponent: FC<Props> = ({ user }) => {
   return (
     <>
       <Tabs.Group aria-label="Default tabs" style="default">
@@ -31,4 +26,4 @@ const TabComponent: FC<Props> = ({ user }) => {
   );
 };
 
-export default TabComponent;
+export default UserTabComponent;

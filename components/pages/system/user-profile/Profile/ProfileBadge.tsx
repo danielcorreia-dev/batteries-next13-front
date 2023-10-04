@@ -6,7 +6,7 @@ type BadgeProps = {
   borderColor?: string;
   borderSize?: string;
   label: string;
-  value?: number;
+  value?: number | string;
 };
 
 const ProfileBadge = ({
@@ -26,7 +26,9 @@ const ProfileBadge = ({
       </span>
       <p className="text-sm dark:text-neutral-200">{label}</p>
       {value && (
-        <p className="text-sm font-semibold dark:text-neutral-200">{value}</p>
+        <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+          {value}
+        </p>
       )}
     </div>
   );

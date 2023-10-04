@@ -33,19 +33,15 @@ export const authOptions: NextAuthOptions = {
       // eslint-disable-next-line no-unused-vars
       async authorize(credentials, req) {
         if (!credentials?.username || !credentials?.password) return null;
-
         const { username, password, userType } = credentials;
-        const res = await fetch(
-          `${process.env.DOMAIN_URL}/api/auth/login/user`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "user-type": userType || "user",
-            },
-            body: JSON.stringify({ username, password }),
+        const res = await fetch(`${process.env.DOMAIN_URL}/api/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "user-type": userType || "user",
           },
-        );
+          body: JSON.stringify({ username, password }),
+        });
 
         const data = await res.json();
 
@@ -64,6 +60,10 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // eslint-disable-next-line no-unused-vars
     async jwt({ token, user, account, profile, trigger }) {
+      if (trigger === "signUp") {
+        console.log(user);
+      }
+
       if (user) return { ...token, ...user };
 
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;

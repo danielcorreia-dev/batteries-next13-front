@@ -17,7 +17,6 @@ type Props = {
 };
 
 const Page = async (props: Props) => {
-  console.log(props.params.id);
   const session = await getServerSession(authOptions);
   const res = await fetch(
     `${process.env.DOMAIN_URL}/api/users/` + props.params.id,

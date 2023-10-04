@@ -1,6 +1,8 @@
+import { TablerIconNames } from "@/components/ui/GetIcon";
+
 export type Achievement = {
   id: number;
-  icon: string;
+  icon: TablerIconNames;
   name: string;
   description: string;
   requiredDiscard: null | number;

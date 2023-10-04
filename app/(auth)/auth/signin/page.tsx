@@ -12,7 +12,11 @@ export default async function SignIn() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect("/system/user");
+    if (session.user.type === "company") {
+      return redirect("/system/company/profile");
+    } else if (session.user.type === "user") {
+      return redirect("/system/user/profile");
+    }
   }
 
   return (

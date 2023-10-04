@@ -76,14 +76,14 @@ const RankingListItem: FC<Props> = ({ user, position }) => {
           iconColor="text-yellow-500"
           borderSize="!h-[40px] !w-[40px]"
           label="Pontos"
-          value={user.points}
+          value={user.points || "0"}
         />
         <ProfileBadge
           icon={IconRecycle}
           iconColor="text-green-500"
           borderSize="!h-[40px] !w-[40px]"
           label="Descartes"
-          value={user.discards}
+          value={user.discards || "0"}
         />
       </div>
     </Link>
