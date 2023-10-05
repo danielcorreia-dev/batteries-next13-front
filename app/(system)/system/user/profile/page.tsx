@@ -29,7 +29,7 @@ const Page = async (props: Props) => {
 
   const data = await res.json();
   const user = data.data;
-  console.log(user);
+
   return (
     <>
       <SystemHeader
@@ -40,7 +40,7 @@ const Page = async (props: Props) => {
         <Profile.Header user={user} mine />
         <Profile.Bio user={user} />
         <Profile.BadgeSection user={user} className="self-center" />
-        <Profile.Tabs user={user} />
+        <Profile.Tabs user={user} me />
       </Profile.Root>
     </>
   );

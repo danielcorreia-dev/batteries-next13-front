@@ -1,11 +1,14 @@
 "use client";
 
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LoadingButton from "@/components/ui/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Checkbox, Label, TextInput } from "flowbite-react";
+import { getServerSession } from "next-auth";
 import { signIn } from "next-auth/react";
+import { cookies } from "next/headers";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -49,6 +52,7 @@ const UserSignInForm = () => {
       });
     } else {
       setLoading(false);
+      
       router.push("/system/user/profile");
     }
   };

@@ -5,17 +5,19 @@ import { IconOlympics, IconRecycle, IconSparkles } from "@tabler/icons-react";
 
 type Props = {
   metrics: any;
+  me?: boolean;
 };
 
-const Metrics: FC<Props> = ({ metrics }) => {
+const Metrics: FC<Props> = ({ metrics, me = false }) => {
   const { totalDiscards, totalPoints, totalAchievements } = metrics;
+  const meTitle = me
+    ? "Seus dados durante o último mês"
+    : "Dados do usuário durante o último mês";
+
   return (
     <>
       <div className="mb-4">
-        <SystemHeader
-          title="Seus dados durante o último mês"
-          titleSize="!text-base"
-        />
+        <SystemHeader title={meTitle} titleSize="!text-base" />
       </div>
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {/* Card */}

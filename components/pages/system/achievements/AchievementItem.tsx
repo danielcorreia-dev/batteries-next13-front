@@ -70,7 +70,7 @@ const AchievementItem: FC<Props> = ({ achievement }) => {
         className="hs-overlay fixed left-0 top-0 z-[99] hidden h-full w-full overflow-y-auto overflow-x-hidden"
       >
         <div className="m-3 mt-0 flex min-h-[calc(100%-3.5rem)] items-center opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 md:mx-auto md:w-full md:max-w-2xl">
-          <div className="flex flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:shadow-slate-700/[.7]">
+          <div className="flex w-full flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:shadow-slate-700/[.7]">
             <div className="flex items-center justify-between border-b px-4 py-3 dark:border-gray-700">
               <h3 className="font-bold text-gray-800 dark:text-white">
                 Detalhes da Conquista - {name}

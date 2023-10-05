@@ -39,6 +39,7 @@ const CompanySignInForm = () => {
     const { username, password } = data;
 
     setLoading(true);
+
     const result = await signIn("credentials", {
       username,
       password,
@@ -53,6 +54,7 @@ const CompanySignInForm = () => {
       });
     } else {
       setLoading(false);
+
       router.push("/system/company/profile");
     }
   };

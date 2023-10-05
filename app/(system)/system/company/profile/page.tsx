@@ -1,10 +1,12 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import CardContainer from "@/components/ui/CardContainer";
 import SystemHeader from "@/components/ui/SystemHeader";
+import { getServerSession } from "next-auth/next";
 import React from "react";
 
-type Props = {};
+const Profile = async () => {
+  const session = await getServerSession(authOptions);
 
-const Profile = (props: Props) => {
   return (
     <>
       <SystemHeader

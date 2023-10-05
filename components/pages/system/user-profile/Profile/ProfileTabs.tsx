@@ -4,6 +4,7 @@ import Metrics from "../card-suggetions/Metrics";
 
 type Props = {
   user: UserProps;
+  me?: boolean;
 };
 
 type UserProps = {
@@ -12,7 +13,7 @@ type UserProps = {
   discards: any[];
 };
 
-const ProfileTabs: FC<Props> = ({ user }) => {
+const ProfileTabs: FC<Props> = ({ user, me = false }) => {
   return (
     <div className="mt-8">
       <div className="border-b border-gray-200 px-4 dark:border-gray-700">
@@ -61,7 +62,7 @@ const ProfileTabs: FC<Props> = ({ user }) => {
           role="tabpanel"
           aria-labelledby="basic-tabs-item-2"
         >
-          <Metrics metrics={user.metrics} />
+          <Metrics metrics={user.metrics} me={me} />
         </div>
       </div>
     </div>

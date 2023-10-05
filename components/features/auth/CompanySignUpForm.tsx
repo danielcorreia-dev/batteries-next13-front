@@ -65,7 +65,7 @@ const CompanySignUpForm = () => {
       setLoading(false);
       toast.success("Cadastro realizado com sucesso!");
       setTimeout(() => {
-        router.push("/auth/signin");
+        router.push("/auth/signin/company");
       }, 500);
     } else {
       toast.error("Erro ao realizar o cadastro");

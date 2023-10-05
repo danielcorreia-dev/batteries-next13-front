@@ -19,7 +19,7 @@ type Props = {
 const Page = async (props: Props) => {
   const session = await getServerSession(authOptions);
   const res = await fetch(
-    `${process.env.DOMAIN_URL}/api/users/` + props.params.id,
+    `${process.env.DOMAIN_URL}/api/users/` + props.params.id + `/profile`,
     {
       method: "GET",
       headers: {
@@ -33,13 +33,16 @@ const Page = async (props: Props) => {
   const user = data.data;
   return (
     <>
-      <SystemHeader title="Perfil de usuário" />
-      <div className="container grid gap-6  md:grid-cols-8">
-        <Profile.Root className="col-span-6">
-          <Profile.Header user={user} />
-        </Profile.Root>
-        <CardContainer className="col-span-2">asdf</CardContainer>
-      </div>
+      <SystemHeader
+        title="Seu perfil"
+        subtitle="Confira suas informações e desempenho"
+      />
+      <Profile.Root className="flex max-w-4xl flex-col !px-16 py-8">
+        <Profile.Header user={user} />
+        <Profile.Bio user={user} />
+        <Profile.BadgeSection user={user} className="self-center" />
+        <Profile.Tabs user={user} />
+      </Profile.Root>
     </>
   );
 };

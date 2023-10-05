@@ -10,6 +10,7 @@ type Props = {
 
 const SystemUserLayout = async ({ children }: Props) => {
   const session = await getServerSession(authOptions);
+
   return (
     <>
       <div>
