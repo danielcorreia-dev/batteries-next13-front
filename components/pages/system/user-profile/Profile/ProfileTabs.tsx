@@ -1,6 +1,8 @@
 import { FC } from "react";
 import DiscardItem from "../card-suggetions/DiscardItem";
 import Metrics from "../card-suggetions/Metrics";
+import RetrievedHistoryList from "@/components/features/retreived-benefit/RetrievedHistoryList";
+import SystemHeader from "@/components/ui/SystemHeader";
 
 type Props = {
   user: UserProps;
@@ -38,6 +40,16 @@ const ProfileTabs: FC<Props> = ({ user, me = false }) => {
           >
             Métricas
           </button>
+          <button
+            type="button"
+            className="inline-flex items-center gap-2 whitespace-nowrap border-b-[3px] border-transparent px-1 py-4 text-sm text-gray-500 transition-colors hover:border-blue-300 hover:text-blue-300 hs-tab-active:border-blue-600 hs-tab-active:font-semibold hs-tab-active:text-blue-600"
+            id="basic-tabs-item-3"
+            data-hs-tab="#basic-tabs-3"
+            aria-controls="basic-tabs-3"
+            role="tab"
+          >
+            Histórico de resgates
+          </button>
         </nav>
       </div>
 
@@ -48,6 +60,10 @@ const ProfileTabs: FC<Props> = ({ user, me = false }) => {
           aria-labelledby="basic-tabs-item-1"
         >
           {/* Content */}
+          <SystemHeader
+            title="Seu histórico de descartes"
+            titleSize="text-base"
+          />
           <ul>
             {user.discards.map((discard) => (
               <li key={discard.id}>
@@ -63,6 +79,14 @@ const ProfileTabs: FC<Props> = ({ user, me = false }) => {
           aria-labelledby="basic-tabs-item-2"
         >
           <Metrics metrics={user.metrics} me={me} />
+        </div>
+        <div
+          id="basic-tabs-3"
+          className="hidden"
+          role="tabpanel"
+          aria-labelledby="basic-tabs-item-3"
+        >
+          <RetrievedHistoryList />
         </div>
       </div>
     </div>

@@ -5,9 +5,7 @@ import DeleteCompany from "./DeleteCompany";
 import { IconBuildingStore, IconTrash } from "@tabler/icons-react";
 import AlterCompany from "./AlterCompany";
 
-type Props = {};
-
-const CompanyTabComponent = (props: Props) => {
+const CompanyTabComponent = () => {
   return (
     <>
       <Tabs.Group aria-label="Default tabs" style="default">

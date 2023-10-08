@@ -1,8 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Profile } from "@/components/pages/system/user-profile/Profile/";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import SystemHeader from "@/components/ui/SystemHeader";
-import { IconChevronRight } from "@tabler/icons-react";
 import { getServerSession } from "next-auth";
 import React from "react";
 
@@ -11,9 +9,7 @@ export const metadata = {
   description: "Página de perfil do usuário",
 };
 
-type Props = {};
-
-const Page = async (props: Props) => {
+const Page = async () => {
   const session = await getServerSession(authOptions);
 
   const res = await fetch(

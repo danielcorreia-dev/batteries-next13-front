@@ -19,9 +19,6 @@ interface UserProps {
 }
 
 const ProfileHeader: FC<Props> = ({ user, mine }) => {
-  let name = user.name || "";
-  name = user.name.charAt(0).toUpperCase() + user.name.slice(1);
-
   return (
     <div className="container">
       <div className="flex flex-wrap items-center justify-center gap-8 md:justify-between">
@@ -36,7 +33,7 @@ const ProfileHeader: FC<Props> = ({ user, mine }) => {
             />
           </div>
           <div className="flex flex-col">
-            <h2 className="text-2xl">{name}</h2>
+            <h2 className="text-2xl dark:text-neutral-200">{user.name}</h2>
             <span className="text-xs text-neutral-400">@{user.username}</span>
           </div>
         </div>
