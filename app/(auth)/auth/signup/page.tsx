@@ -3,7 +3,7 @@ export const metadata = {
   description: "Page description",
 };
 
-import UserSignUpForm from "@/components/landing/forms/UserSignUpForm";
+import UserSignUpForm from "@/components/features/auth/UserSignUpForm";
 import Link from "next/link";
 
 export default function SignUp() {
@@ -13,7 +13,10 @@ export default function SignUp() {
         <div className="pb-12 pt-32 md:pb-20 md:pt-40">
           {/* Page header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <h1 className="h1">Bem vindo. O meio ambiente agradece.</h1>
+            <h1 className="h1">Bem vindo. O meio ambiente </h1>
+            <span className="h1 bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
+              agradece
+            </span>
           </div>
 
           {/* Form */}
@@ -67,7 +70,7 @@ export default function SignUp() {
             <div className="mt-6 text-center text-gray-600">
               Já tem uma conta?{" "}
               <Link
-                href="/signin"
+                href="/auth/signin"
                 className="text-blue-600 transition duration-150 ease-in-out hover:underline"
               >
                 Logue-se

@@ -107,7 +107,7 @@ export default function Newsletter() {
 
                 <Link
                   className="btn bg-blue-600 text-white shadow hover:bg-blue-700"
-                  href="/signup"
+                  href="/auth/signup"
                 >
                   Cadastre-se
                 </Link>
